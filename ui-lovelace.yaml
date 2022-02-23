@@ -1,0 +1,950 @@
+---
+button_card_templates: !include_dir_merge_named "../../custom_components/ui_lovelace_minimalist/__ui_minimalist__/ulm_templates/"
+
+title: "Home Overview"
+theme: "minimalist-mobile-tapbar"
+background: "var(--background-image)"
+# views: !include_dir_merge_list "views/"
+views:
+  - title: "Overview"
+    path: 0
+    icon: "mdi:shield-home"
+    cards:
+      - type: "vertical-stack"
+        cards:
+          - type: custom:button-card
+            template: custom_card_paddy_welcome_with_weather
+            variables:
+              ulm_custom_card_paddy_welcome_time: sensor.time
+              ulm_custom_card_paddy_welcome_weather_provider: "weather.corgi_cottage"
+#          - type: "custom:auto-entities"
+#            card:
+#              type: "grid"
+#              columns: 1
+#              square: false
+#            card_param: "cards"
+#            sort:
+#              count: 1
+#            filter:
+#              include:
+#                - domain: "weather"
+#                  options:
+#                    type: "custom:button-card"
+#                    template: "card_welcome_scenes"
+#                    variables:
+#                      ulm_weather: "weather.living_room"
+          - type: "horizontal-stack"
+            cards:
+              - type: "custom:button-card"
+                color_type: blank-card
+              - type: 'custom:button-card'
+                template: chip_alarm
+                entity: alarm_control_panel.abode_alarm
+              - type: 'custom:button-card'
+                template: chip_temperature
+                variables:
+                  ulm_chip_temperature_inside: sensor.home_temperature
+                  ulm_chip_temperature_outside: sensor.corgi_cottage_realfeel_temperature
+                  ulm_chip_temperature_weather: "weather.living_room"
+              - type: 'custom:button-card'
+                template: chip_alarm
+                entity: alarm_control_panel.aarlo_base_station
+              - type: "custom:button-card"
+                color_type: blank-card
+          #Navigation to other panels for mobile
+#          - type: "grid"
+#            columns: 4
+#            square: false
+#            cards:
+#              - type: "custom:button-card"
+#                template: chip_navigate
+#                label: 'Home Climate'
+#                variables:
+#                  ulm_chip_navigate_path: /ui-lovelace-minimalist/1
+#                  ulm_chip_navigate_icon: "mdi:thermometer"
+#              - type: "custom:button-card"
+#                template: chip_navigate
+#                label: 'Home Security'
+#                variables:
+#                  ulm_chip_navigate_path: /ui-lovelace-minimalist/2
+#                  ulm_chip_navigate_icon: "mdi:shield-account"
+#             - type: "custom:button-card"
+#                template: chip_navigate
+#                label: 'Home Energy'
+#                variables:
+#                  ulm_chip_navigate_path: /ui-lovelace-minimalist/3
+#                  ulm_chip_navigate_icon: "mdi:lightning-bolt"
+#              - type: "custom:button-card"
+#                template: chip_navigate
+#                label: 'Home Lighting'
+#                variables:
+#                  ulm_chip_navigate_path: /ui-lovelace-minimalist/4
+#                  ulm_chip_navigate_icon: "mdi:lightbulb"
+          - type: "custom:button-card"
+            color_type: blank-card
+          - type: "grid"
+            columns: 2
+            square: false
+            cards:
+              - type: 'custom:button-card'
+                template: card_graph
+                variables:
+                  ulm_card_graph_color: "orange"
+                  ulm_card_graph_name: Home Temperature
+                  ulm_card_graph_entity: sensor.home_temperature
+                  ulm_card_graph_type: fill
+                  ulm_card_graph_hours: 24
+              - type: 'custom:button-card'
+                template: card_graph
+                variables:
+                  ulm_card_graph_color: "orange"
+                  ulm_card_graph_name: Home Humidity
+                  ulm_card_graph_entity: sensor.living_room_humidity
+                  ulm_card_graph_type: fill
+                  ulm_card_graph_hours: 24
+              - type: 'custom:button-card'
+                template: card_graph
+                variables:
+                  ulm_card_graph_color: "orange"
+                  ulm_card_graph_name: Home Energy
+                  ulm_card_graph_entity: sensor.energy_usage
+                  ulm_card_graph_type: fill
+                  ulm_card_graph_hours: 24    
+              - type: 'custom:button-card'
+                template: card_graph
+                variables:
+                  ulm_card_graph_color: "orange"
+                  ulm_card_graph_name: Home Pressure
+                  ulm_card_graph_entity: sensor.basement_pressure
+                  ulm_card_graph_type: fill
+                  ulm_card_graph_hours: 12       
+          - type: "custom:button-card"
+            template: "card_title"
+            name: "Lights"
+            label: "Important Lights"
+          - type: "grid"
+            columns: 2
+            square: false
+            cards:
+              - type: "custom:button-card"
+                template: "card_light"
+                entity: "light.back_door"
+                variables:
+                  ulm_card_light_enable_slider: true
+                  ulm_card_light_enable_color: true
+                  ulm_card_light_enable_popup: true
+              - type: "custom:button-card"
+                template: "card_light"
+                entity: "light.front_porch"
+                variables:
+                  ulm_card_light_enable_slider: true
+                  ulm_card_light_enable_color: true
+                  ulm_card_light_enable_popup: true
+              - type: "custom:button-card"
+                template: "card_light"
+                entity: "light.bedroom_ceiling_light"
+                variables:
+                  ulm_card_light_enable_slider: true
+                  ulm_card_light_enable_color: true
+                  ulm_card_light_enable_popup: true
+              - type: "custom:button-card"
+                template: "card_light"
+                entity: "light.bathroom_lights_zha_group"
+                variables:
+                  ulm_card_light_enable_slider: true
+                  ulm_card_light_enable_color: true
+                  ulm_card_light_enable_popup: true
+                  ulm_card_light_name: "Bathroom"
+              - type: "custom:button-card"
+                template: "card_light"
+                entity: "light.basement_lights"
+                variables:
+                  ulm_card_light_enable_slider: true
+                  ulm_card_light_enable_color: true
+                  ulm_card_light_enable_popup: true
+                  ulm_card_light_name: "Basement"
+              - type: "custom:button-card"
+                template: "card_light"
+                entity: "light.hallway_trafdi_level_on_off"
+                variables:
+                  ulm_card_light_enable_slider: true
+                  ulm_card_light_enable_color: true
+                  ulm_card_light_enable_popup: true
+                  ulm_card_light_name: "Hallway"
+          - type: "custom:button-card"
+            template: "card_title"
+            name: "Binary Sensors"
+            label: "Just a smattering of binary sensors"
+          - type: "grid"
+            square: false
+            columns: 2
+            cards: 
+              - type: 'custom:button-card'
+                template: card_binary_sensor
+                variables:
+                  - ulm_card_binary_sensor_alert: true
+                entity: binary_sensor.office_occupancy_nest
+                show_last_changed: true
+              - type: 'custom:button-card'
+                template: card_binary_sensor
+                variables:
+                  - ulm_card_binary_sensor_alert: true
+                entity: binary_sensor.bedroom_ocupancy_nest
+                show_last_changed: true
+              - type: 'custom:button-card'
+                template: card_binary_sensor
+                variables:
+                  - ulm_card_binary_sensor_alert: true
+                entity: binary_sensor.dining_room_occupancy_nest
+                show_last_changed: true
+              - type: 'custom:button-card'
+                template: card_binary_sensor
+                variables:
+                  - ulm_card_binary_sensor_alert: true
+                entity: binary_sensor.garage_door
+                show_last_changed: true
+          - type: "custom:button-card"
+            template: "card_title"
+            name: "Sensors"
+            label: "This is the Minimalist-sensor-card"
+          - type: "grid"
+            square: false
+            columns: 2
+            cards:
+              - type: 'custom:button-card'
+                template: card_homeassistant_updates
+                variables:
+                  ulm_card_homeassistant_entity: 'group.updaters'
+                  ulm_card_homeassistant_core: "sensor.core_updates"
+                  ulm_card_homeassistant_supervisor: "sensor.supervisor_updates"
+                  ulm_card_homeassistant_os: "sensor.os_updates"
+              - type: 'custom:button-card'
+                template: card_person
+                variables:
+                  ulm_card_person_entity: person.daniel
+                  ulm_card_person_use_entity_picture: false
+                  ulm_card_person_zone1: zone.home
+                  ulm_card_person_zone2: zone.gym
+                  ulm_address: sensor.red_fox_geocoded_location
+          - type: "custom:button-card"
+            template: "card_title"
+            name: "Batteries"
+            label: "Get juicy"
+          - type: "grid"
+            square: false
+            columns: 2
+            cards:
+              - type: 'custom:button-card'
+                template: card_battery
+                entity: sensor.aarlo_battery_level_floodlight
+                variables:
+                    ulm_card_battery_charger_type_entity_id: sensor.aarlo_battery_level_floodlight
+                    ulm_card_battery_battery_level_danger: 30
+                    ulm_card_battery_battery_level_warning: 50
+                name: "Arlo Floodlight"
+              - type: 'custom:button-card'
+                template: card_battery
+                entity: sensor.aarlo_battery_level_kitchen_camera
+                variables:
+                    ulm_card_battery_charger_type_entity_id: sensor.aarlo_battery_level_kitchen_camera
+                    ulm_card_battery_battery_level_danger: 30
+                    ulm_card_battery_battery_level_warning: 50
+                name: "Arlo Floodlight"
+          - type: "custom:button-card"
+            template: "card_title"
+            name: "Media"
+            label: "Lets get the party started!"
+          - type: "grid"
+            columns: 2
+            square: false
+            cards:
+              - type: 'custom:button-card'
+                template: card_media_player_art
+                entity: media_player.bedroom
+                name: Office Speaker
+              - type: 'custom:button-card'
+                template: card_media_player_art
+                entity: media_player.bedroom_speaker
+                name: Bedroom Speaker              
+              - type: 'custom:button-card'
+                template: card_media_player_art
+                entity: media_player.unnamed_room
+                name: Bathroom Speaker
+              - type: 'custom:button-card'
+                template: card_media_player_art
+                entity: media_player.living_room_surround
+                name: Living Room Surround           
+  - title: "Home Climate" 
+    path: 1
+    icon: "mdi:thermometer"
+    cards:
+      - type: "vertical-stack"
+        cards:
+          - type: 'custom:button-card'
+            template: chip_temperature
+            variables:
+              ulm_chip_temperature_inside: sensor.home_temperature
+              ulm_chip_temperature_outside: sensor.corgi_cottage_realfeel_temperature
+              ulm_chip_temperature_weather: "weather.living_room"
+          #Navigation to other panels for mobile
+#          - type: "grid"
+#            columns: 4
+#            square: false
+#            cards:
+#              - type: "custom:button-card"
+#                template: chip_navigate
+#                label: 'Home'
+#                variables:
+#                  ulm_chip_navigate_path: /ui-lovelace-minimalist/0
+#                  ulm_chip_navigate_icon: "mdi:shield-home"
+#              - type: "custom:button-card"
+#                template: chip_navigate
+#                label: 'Home Security'
+#                variables:
+#                  ulm_chip_navigate_path: /ui-lovelace-minimalist/2
+#                  ulm_chip_navigate_icon: "mdi:shield-account"
+#              - type: "custom:button-card"
+#                template: chip_navigate
+#                label: 'Home Energy'
+#                variables:
+#                  ulm_chip_navigate_path: /ui-lovelace-minimalist/3
+#                  ulm_chip_navigate_icon: "mdi:lightning-bolt"
+#              - type: "custom:button-card"
+#                template: chip_navigate
+#                label: 'Home Lighting'
+#                variables:
+#                  ulm_chip_navigate_path: /ui-lovelace-minimalist/4
+#                  ulm_chip_navigate_icon: "mdi:lightbulb"
+          - type: 'custom:button-card'
+            template: card_title
+            name: Home Climate
+            label: 'View for all climate entities in my home'
+          - type: "custom:button-card"
+            template: card_weather
+            entity: "weather.living_room"
+            variables:
+              ulm_card_weather_name: "Minneapolis Weather"
+              ulm_card_weather_primary_info:
+                - wind_speed
+                - precipitation_probability
+              ulm_card_weather_backdrop:
+                fade: true
+          - type: "custom:button-card"
+            template: card_thermostat
+            entity: climate.living_room
+            variables:
+              ulm_card_thermostat_enable_collapse: true
+              ulm_card_thermostat_enable_controls: false
+              ulm_card_thermostat_enable_hvac_modes: true
+              ulm_card_thermostat_enable_popup: true
+              ulm_card_thermostat_enable_background_color: true
+              ulm_card_thermostat_enable_display_temperature: true
+              ulm_card_thermostat_name: Queen Bee
+          - type: 'custom:button-card'
+            template: card_title
+            name: 'Interior Temps'
+          - type: "grid"
+            square: false
+            columns: 2
+            cards:
+              - type: 'custom:button-card'
+                template: card_graph
+                variables:
+                  ulm_card_graph_color: "orange"
+                  ulm_card_graph_name: Temperature Living Room
+                  ulm_card_graph_entity: sensor.living_room_temperature
+                  ulm_card_graph_hours: 12
+              - type: 'custom:button-card'
+                template: card_graph
+                variables:
+                  ulm_card_graph_color: "orange"
+                  ulm_card_graph_name: Temperature Bedroom
+                  ulm_card_graph_entity: sensor.bedroom_temperature
+                  ulm_card_graph_color2: "orange"
+                  ulm_card_graph_entity2: sensor.pure_cool_link_temperature
+                  ulm_card_graph_type: fill
+                  ulm_card_graph_hours: 12
+              - type: 'custom:button-card'
+                template: card_graph
+                variables:
+                  ulm_card_graph_color: "orange"
+                  ulm_card_graph_name: Temperature Dining Room
+                  ulm_card_graph_entity: sensor.dining_room_temperature
+                  ulm_card_graph_hours: 12
+              - type: 'custom:button-card'
+                template: card_graph
+                variables:
+                  ulm_card_graph_color: "orange"
+                  ulm_card_graph_name: Temperature Office
+                  ulm_card_graph_entity: sensor.office_temperature
+                  ulm_card_graph_hours: 12
+              - type: 'custom:button-card'
+                template: card_graph
+                variables:
+                  ulm_card_graph_color: "orange"
+                  ulm_card_graph_name: Temperature Basement
+                  ulm_card_graph_entity: sensor.basement_temp
+                  ulm_card_graph_hours: 12
+              - type: 'custom:button-card'
+                template: card_graph
+                variables:
+                  ulm_card_graph_color: "orange"
+                  ulm_card_graph_name: Temperature Home Average
+                  ulm_card_graph_entity: sensor.home_temperature
+                  ulm_card_graph_hours: 12
+          - type: 'custom:button-card'
+            template: card_title
+            name: 'Interior Humidity'
+          - type: "grid"
+            square: false
+            columns: 2
+            cards:
+              - type: 'custom:button-card'
+                template: card_graph
+                variables:
+                  ulm_card_graph_color: "green"
+                  ulm_card_graph_name: Humidity Basement
+                  ulm_card_graph_entity: sensor.basement_humidity
+                  ulm_card_graph_hours: 12
+              - type: 'custom:button-card'
+                template: card_graph
+                variables:
+                  ulm_card_graph_color: "green"
+                  ulm_card_graph_name: Humidity Living Room
+                  ulm_card_graph_entity: sensor.living_room_humidity
+                  ulm_card_graph_hours: 12
+  - title: "Home Security" 
+    path: 2
+    icon: "mdi:shield-account"
+    cards:
+      - type: "vertical-stack"
+        cards:
+          - type: "grid"
+            columns: 5
+            square: false
+            cards:
+              - type: 'custom:button-card'
+                template: chip_alarm
+                entity: alarm_control_panel.abode_alarm
+              - type: 'custom:button-card'
+                template: chip_alarm
+                entity: alarm_control_panel.aarlo_base_station
+              - type: 'custom:button-card'
+                template: chip_icon_state
+
+          #Navigation to other panels for mobile
+#          - type: "grid"
+#            columns: 4
+#            square: false
+#            cards:
+#              - type: "custom:button-card"
+#                template: chip_navigate
+#                label: 'Home'
+#                variables:
+#                  ulm_chip_navigate_path: /ui-lovelace-minimalist/0
+#                 ulm_chip_navigate_icon: "mdi:shield-home"
+#              - type: "custom:button-card"
+#                template: chip_navigate
+#                label: 'Home Climate'
+#                variables:
+#                  ulm_chip_navigate_path: /ui-lovelace-minimalist/1
+#                  ulm_chip_navigate_icon: "mdi:thermometer"
+#              - type: "custom:button-card"
+#                template: chip_navigate
+#                label: 'Home Energy'
+#                variables:
+#                  ulm_chip_navigate_path: /ui-lovelace-minimalist/3
+#                  ulm_chip_navigate_icon: "mdi:lightning-bolt"
+#              - type: "custom:button-card"
+#                template: chip_navigate
+#                label: 'Home Lighting'
+#                variables:
+#                  ulm_chip_navigate_path: /ui-lovelace-minimalist/4
+#                  ulm_chip_navigate_icon: "mdi:lightbulb"
+          #Meat of the View
+          - type: 'custom:button-card'
+            template: card_title
+            name: "Home Security"
+            label: 'View for all security entities in my home'          
+          - type: 'custom:button-card'
+            template:
+              - card_cover_buttons
+            variables:
+              ulm_card_cover_buttons_name: "Garage Door"
+              ulm_card_cover_buttons_entity: "cover.meross_garage_door"
+          - type: 'custom:button-card'
+            template: card_title
+            name: "Locks"
+            label: 'Lock it down'          
+          - type: "grid"
+            square: false
+            columns: 3
+            cards:              
+            - type: 'custom:button-card'
+              template: custom_card_eraycetinay_lock
+              entity: lock.garage_lock 
+              name: Garage Lock
+              #icon: mdi:lock-open
+              variables:
+                ulm_custom_card_eraycetinay_lock_tap_control: true
+            - type: 'custom:button-card'
+              template: custom_card_eraycetinay_lock
+              entity: lock.back_door 
+              name: Back Door Lock
+              #icon: mdi:lock-open
+              variables:
+                ulm_custom_card_eraycetinay_lock_tap_control: true
+            - type: 'custom:button-card'
+              template: custom_card_eraycetinay_lock
+              entity: lock.front_door_lock
+              name: Front Door Lock
+              #icon: mdi:lock-open
+              variables:
+                ulm_custom_card_eraycetinay_lock_tap_control: true
+          - type: 'custom:button-card'
+            template: card_title
+            name: "Aarlo Cameras"
+            label: 'Camera Views'          
+          - type: "grid"
+            square: false
+            columns: 2
+            cards:
+              - type: custom:aarlo-glance
+                entity: camera.aarlo_floodlight
+                image_click: stream
+                image_top: 'onoff,motion,library,stream,signal,sound,snapshot'
+              - type: custom:aarlo-glance
+                entity: camera.aarlo_kitchen_camera
+                image_click: stream
+                image_top: 'onoff,motion,library,stream,signal,sound,snapshot'
+          - type: 'custom:button-card'
+            template: card_title
+            name: "Motion"
+            label: 'What just moved?'          
+          - type: "grid"
+            square: false
+            columns: 2
+            cards:
+              - type: 'custom:button-card'
+                template: card_binary_sensor
+                variables:
+                  - ulm_card_binary_sensor_alert: true
+                entity: binary_sensor.garage_door
+                show_last_changed: true
+              - type: 'custom:button-card'
+                template: card_binary_sensor
+                variables:
+                  - ulm_card_binary_sensor_alert: true
+                entity: binary_sensor.backdoor_motion
+                show_last_changed: true
+              - type: 'custom:button-card'
+                template: card_binary_sensor
+                variables:
+                  - ulm_card_binary_sensor_alert: true
+                entity: binary_sensor.aarlo_motion_floodlight
+                show_last_changed: true
+              - type: 'custom:button-card'
+                template: card_binary_sensor
+                variables:
+                  - ulm_card_binary_sensor_alert: true
+                entity: binary_sensor.aarlo_motion_kitchen_camera
+                show_last_changed: true
+              - type: 'custom:button-card'
+                template: card_binary_sensor
+                variables:
+                  - ulm_card_binary_sensor_alert: true
+                entity: binary_sensor.office_occupancy
+                show_last_changed: true
+              - type: 'custom:button-card'
+                template: card_binary_sensor
+                variables:
+                  - ulm_card_binary_sensor_alert: true
+                entity: binary_sensor.bedroom_occupancy
+                show_last_changed: true
+              - type: 'custom:button-card'
+                template: card_binary_sensor
+                variables:
+                  - ulm_card_binary_sensor_alert: true
+                entity: binary_sensor.living_room_occupancy
+                show_last_changed: true
+              - type: 'custom:button-card'
+                template: card_binary_sensor
+                variables:
+                  - ulm_card_binary_sensor_alert: true
+                entity: binary_sensor.dining_room_occupancy
+                show_last_changed: true
+          - type: 'custom:button-card'
+            template: card_title
+            name: "Occupancy"
+            label: 'Where is everyone? (calculated off Nest)'
+          - type: "grid"
+            square: false
+            columns: 2
+            cards:
+              - type: 'custom:button-card'
+                template: card_binary_sensor
+                variables:
+                  - ulm_card_binary_sensor_alert: true
+                entity: binary_sensor.office_occupancy_nest
+                show_last_changed: true
+              - type: 'custom:button-card'
+                template: card_binary_sensor
+                variables:
+                  - ulm_card_binary_sensor_alert: true
+                entity: binary_sensor.basement_occupancy
+                show_last_changed: true
+              - type: 'custom:button-card'
+                template: card_binary_sensor
+                variables:
+                  - ulm_card_binary_sensor_alert: true
+                entity: binary_sensor.hallway_occupancy
+                show_last_changed: true
+              - type: 'custom:button-card'
+                template: card_binary_sensor
+                variables:
+                  - ulm_card_binary_sensor_alert: true
+                entity: binary_sensor.dining_room_occupancy_nest
+                show_last_changed: true
+              - type: 'custom:button-card'
+                template: card_binary_sensor
+                variables:
+                  - ulm_card_binary_sensor_alert: true
+                entity: binary_sensor.bedroom_ocupancy_nest
+                show_last_changed: true
+          - type: 'custom:button-card'
+            template: card_title
+            name: "Contact Sensors"
+            label: 'To the windows! To the Doors!'
+          - type: "grid"
+            square: false
+            columns: 2
+            cards:
+              - type: 'custom:button-card'
+                template: card_binary_sensor
+                variables:
+                  - ulm_card_binary_sensor_alert: true
+                entity: binary_sensor.back_door
+                show_last_changed: true
+              - type: 'custom:button-card'
+                template: card_binary_sensor
+                variables:
+                  - ulm_card_binary_sensor_alert: true
+                entity: binary_sensor.front_door
+                show_last_changed: true
+              - type: 'custom:button-card'
+                template: card_binary_sensor
+                variables:
+                  - ulm_card_binary_sensor_alert: true
+                entity: binary_sensor.living_room_window
+                show_last_changed: true
+              - type: 'custom:button-card'
+                template: card_binary_sensor
+                variables:
+                  - ulm_card_binary_sensor_alert: true
+                entity: binary_sensor.glass_sensor
+                show_last_changed: true
+  - title: "Home Energy" 
+    path: 3
+    icon: "mdi:lightning-bolt"
+    cards:
+      - type: "vertical-stack"
+        cards:
+          #Navigation to other panels for mobile
+#          - type: "grid"
+#            columns: 4
+#            square: false
+#            cards:
+#              - type: "custom:button-card"
+#                template: chip_navigate
+#                label: 'Home'
+#                variables:
+#                  ulm_chip_navigate_path: /ui-lovelace-minimalist/0
+#                  ulm_chip_navigate_icon: "mdi:shield-home"
+#              - type: "custom:button-card"
+#                template: chip_navigate
+#                label: 'Home Climate'
+#                variables:
+#                  ulm_chip_navigate_path: /ui-lovelace-minimalist/1
+#                  ulm_chip_navigate_icon: "mdi:thermostat"
+#              - type: "custom:button-card"
+#                template: chip_navigate
+#                label: 'Home Security'
+#                variables:
+#                  ulm_chip_navigate_path: /ui-lovelace-minimalist/2
+#                  ulm_chip_navigate_icon: "mdi:shield-account"
+#              - type: "custom:button-card"
+#                template: chip_navigate
+#                label: 'Home Lighting'
+#                variables:
+#                  ulm_chip_navigate_path: /ui-lovelace-minimalist/4
+#                  ulm_chip_navigate_icon: "mdi:lightbulb"
+          - type: 'custom:button-card'
+            template: card_title
+            name: "Home Energy Use"
+            label: 'Its electric!'
+          - type: "grid"
+            columns: 2
+            square: false
+            cards:
+              - type: 'custom:button-card'
+                template: card_graph
+                variables:
+                  ulm_card_graph_color: "yellow"
+                  ulm_card_graph_name: Energy Usage Daily
+                  ulm_card_graph_entity: sensor.daily_usage
+                  ulm_card_graph_type: bar
+              - type: 'custom:button-card'
+                template: card_graph
+                variables:
+                  ulm_card_graph_color: "yellow"
+                  ulm_card_graph_name: Energy Usage Current
+                  ulm_card_graph_entity: sensor.energy_usage
+                  ulm_card_graph_type: fill                     
+          - type: "grid"
+            columns: 2
+            square: false
+            cards:
+              - type: 'custom:button-card'
+                template: card_power_outlet
+                entity: switch.juicepad
+                name: Home Automation Trigger
+              - type: 'custom:button-card'
+                template: card_power_outlet
+                entity: switch.desk_charger
+                name: Living Room Lamp
+              - type: 'custom:button-card'
+                template: card_power_outlet
+                entity: switch.flamingo
+                name: Plant Light
+              - type: 'custom:button-card'
+                template: card_power_outlet
+                entity: light.kitchen_outlet
+                name: Kitchen Outlet             
+  - title: "Lighting" 
+    path: 4
+    icon: "mdi:lightbulb"
+    cards:
+      - type: "vertical-stack"
+        cards:
+          #Navigation to other panels for mobile
+#          - type: "grid"
+#            columns: 4
+#            square: false
+#            cards:
+#              - type: "custom:button-card"
+#                template: chip_navigate
+#                label: 'Home'
+#                variables:
+#                  ulm_chip_navigate_path: /ui-lovelace-minimalist/0
+#                  ulm_chip_navigate_icon: "mdi:shield-home"
+#              - type: "custom:button-card"
+#                template: chip_navigate
+#                label: 'Home Climate'
+#                variables:
+#                  ulm_chip_navigate_path: /ui-lovelace-minimalist/1
+#                  ulm_chip_navigate_icon: "mdi:thermometer"
+#              - type: "custom:button-card"
+#                template: chip_navigate
+#                label: 'Home Security'
+#                variables:
+#                  ulm_chip_navigate_path: /ui-lovelace-minimalist/2
+#                  ulm_chip_navigate_icon: "mdi:shield-account"
+#              - type: "custom:button-card"
+#                template: chip_navigate
+#                label: 'Home Energy'
+#                variables:
+#                  ulm_chip_navigate_path: /ui-lovelace-minimalist/3
+#                  ulm_chip_navigate_icon: "mdi:lightning-bolt"
+          - type: 'custom:button-card'
+            template: card_title
+            name: "Home Light Control"
+            label: 'Ignite the dark'
+          - type: "grid"
+            columns: 2
+            square: false
+            cards:
+              - type: "custom:button-card"
+                template: "card_light"
+                entity: "light.back_door"
+                variables:
+                  ulm_card_light_enable_slider: true
+                  ulm_card_light_enable_color: true
+                  ulm_card_light_enable_popup: true
+              - type: "custom:button-card"
+                template: "card_light"
+                entity: "light.front_porch"
+                variables:
+                  ulm_card_light_enable_slider: true
+                  ulm_card_light_enable_color: true
+                  ulm_card_light_enable_popup: true
+              - type: "custom:button-card"
+                template: "card_light"
+                entity: "light.bedroom_ceiling_light"
+                variables:
+                  ulm_card_light_enable_slider: true
+                  ulm_card_light_enable_color: true
+                  ulm_card_light_enable_popup: true
+              - type: "custom:button-card"
+                template: "card_light"
+                entity: "light.bathroom_lights_zha_group"
+                variables:
+                  ulm_card_light_enable_slider: true
+                  ulm_card_light_enable_color: true
+                  ulm_card_light_enable_popup: true
+                  ulm_card_light_name: "Bathroom"
+              - type: "custom:button-card"
+                template: "card_light"
+                entity: "light.basement_lights"
+                variables:
+                  ulm_card_light_enable_slider: true
+                  ulm_card_light_enable_color: true
+                  ulm_card_light_enable_popup: true
+                  ulm_card_light_name: "Basement"
+              - type: "custom:button-card"
+                template: "card_light"
+                entity: "light.back_hallway_level_on_off"
+                variables:
+                  ulm_card_light_enable_slider: true
+                  ulm_card_light_enable_color: true
+                  ulm_card_light_enable_popup: true
+                  ulm_card_light_name: "Back Hallway"
+              - type: "custom:button-card"
+                template: "card_light"
+                entity: "light.hallway_trafdi_level_on_off"
+                variables:
+                  ulm_card_light_enable_slider: true
+                  ulm_card_light_enable_color: true
+                  ulm_card_light_enable_popup: true
+                  ulm_card_light_name: "Hallway"
+              - type: "custom:button-card"
+                template: "card_light"
+                entity: "light.signify_netherlands_b_v_lst002_level_light_color_on_off"
+                variables:
+                  ulm_card_light_enable_slider: true
+                  ulm_card_light_enable_color: true
+                  ulm_card_light_enable_popup: true
+                  ulm_card_light_name: "Office Light Strip"
+              - type: "custom:button-card"
+                template: "card_light"
+                entity: "light.kitchen_island_chandelier"
+                variables:
+                  ulm_card_light_enable_slider: true
+                  ulm_card_light_enable_color: true
+                  ulm_card_light_enable_popup: true
+                  ulm_card_light_name: "Kitchen island"
+              - type: "custom:button-card"
+                template: "card_light"
+                entity: "light.kitchen_main_lights"
+                variables:
+                  ulm_card_light_enable_slider: true
+                  ulm_card_light_enable_color: true
+                  ulm_card_light_enable_popup: true
+                  ulm_card_light_name: "Main Kitchen Lights"
+              - type: "custom:button-card"
+                template: "card_light"
+                entity: "light.dining_room_dimmer"
+                variables:
+                  ulm_card_light_enable_slider: true
+                  ulm_card_light_enable_color: true
+                  ulm_card_light_enable_popup: true
+                  ulm_card_light_name: "Dining Room Lights"
+              - type: "custom:button-card"
+                template: "card_light"
+                entity: "light.office_dimmer"
+                variables:
+                  ulm_card_light_enable_slider: true
+                  ulm_card_light_enable_color: true
+                  ulm_card_light_enable_popup: true
+                  ulm_card_light_name: "Office Ceiling Light"
+
+  - title: "Host Info" 
+    path: 5
+    icon: "mdi:desktop-classic"
+    cards:
+      - type: "vertical-stack"
+        cards:
+          - type: 'custom:button-card'
+            template: card_title
+            name: Computer Information
+            label: 'Just some standard computer info so I can track whats going on'
+          - type: "grid"
+            square: false
+            columns: 2
+            cards:
+                - type: 'custom:button-card'
+                  template: card_graph
+                  variables:
+                    ulm_card_graph_color: "orange"
+                    ulm_card_graph_name: Proc Load
+                    ulm_card_graph_entity: sensor.processor_use
+                    ulm_card_graph_hours: .05
+                - type: 'custom:button-card'
+                  template: card_graph
+                  variables:
+                    ulm_card_graph_color: "orange"
+                    ulm_card_graph_name: Proc Temperature
+                    ulm_card_graph_entity: sensor.processor_temperature
+                    ulm_card_graph_hours: .05
+                - type: 'custom:button-card'
+                  template: card_graph
+                  variables:
+                    ulm_card_graph_color: "orange"
+                    ulm_card_graph_name: Network Activity (In)
+                    ulm_card_graph_entity: sensor.network_in_eth0
+                    ulm_card_graph_hours: 1
+                - type: 'custom:button-card'
+                  template: card_graph
+                  variables:
+                    ulm_card_graph_color: "orange"
+                    ulm_card_graph_name: Network Activity (Out)
+                    ulm_card_graph_entity: sensor.network_out_eth0
+                    ulm_card_graph_hours: 1
+                - type: 'custom:button-card'
+                  template: card_generic
+                  entity: sensor.disk_use_percent
+                - type: 'custom:button-card'
+                  template: card_generic
+                  entity: sensor.memory_use_percent
+                - type: 'custom:button-card'
+                  template: card_generic
+                  entity: sensor.swap_use_percent
+                - type: 'custom:button-card'
+                  template: card_generic
+                  entity: sensor.ipv4_address_eth0
+                - type: 'custom:button-card'
+                  template: card_generic
+                  entity: sensor.ipv6_address_eth0
+          - type: 'custom:button-card'
+            template: card_title
+            name: Speed Test
+            label: 'How fast are things going today'
+          - type: custom:button-card
+            template: custom_card_irmajavi_speedtest
+            variables:
+              ulm_custom_card_irmajavi_speedtest_download_speed_entity: sensor.speedtest_download
+              ulm_custom_card_irmajavi_speedtest_upload_speed_entity: sensor.speedtest_upload
+              ulm_custom_card_irmajavi_speedtest_color: orange
+              ulm_custom_card_irmajavi_speedtest_router_name: Neon Flamingo
+              ulm_custom_card_irmajavi_speedtest_router_model: Amplifi HD
+          - type: 'custom:button-card'
+            template: card_title
+            name: Fail2Ban
+            label: 'Drop the banhammer'
+          - type: grid
+            square: false
+            columns: 2
+            cards:
+              - type: 'custom:button-card'
+                template: card_graph
+                variables:
+                  ulm_card_graph_color: "red"
+                  ulm_card_graph_name: IP Tables
+                  ulm_card_graph_entity: sensor.fail2ban_hass_iptable
+                  ulm_card_graph_hours: 24
+              - type: 'custom:button-card'
+                template: card_graph
+                variables:
+                  ulm_card_graph_color: "red"
+                  ulm_card_graph_name: SSH
+                  ulm_card_graph_entity: sensor.fail2ban_ssh
+                  ulm_card_graph_hours: 24
